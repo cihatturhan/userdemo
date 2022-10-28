@@ -1,51 +1,52 @@
 package com.todo.userdemo.service;
 
 import com.todo.userdemo.model.AppUser;
+import com.todo.userdemo.repository.AppUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 public class AppUserServiceImp implements  AppUserService{
-    List<AppUser> appUserList= new ArrayList<>();
-    Long idToSet=0L;
+    @Autowired
+    AppUserRepository appUserRepository;
 
     @Override
     public List<AppUser> getAll() {
-        return appUserList;
+        return appUserRepository.findAll();
     }
 
     @Override
     public AppUser findById(Long id) {
-        AppUser appUser=appUserList.stream().filter(a->a.getId()==id).collect(Collectors.toList()).get(0);
 
-        return appUser;
+
+
+        return appUserRepository.findById(id).orElseThrow(()->new RuntimeException("User not Found"));
     }
 
     @Override
     public AppUser createNewAppUser(AppUser appUser) {
-        idToSet++;
-        appUser.setId(idToSet);
-        appUserList.add(appUser);
 
-        return appUserList.stream().filter(a->a.getId()== appUser.getId()).collect(Collectors.toList()).get(0);
+        return  appUserRepository.save(appUser);
     }
 
     @Override
     public AppUser updateAppUser(AppUser appUser) {
-        AppUser appUser1=  appUserList.stream().filter(a->a.getId()== appUser.getId()).collect(Collectors.toList()).get(0);
-        appUserList.set(appUserList.indexOf(appUser1), appUser);
-        return appUser;
+
+        return appUserRepository.save(appUser);
     }
 
     @Override
     public void deleteAppUser(Long id) {
-        AppUser appUser1=  appUserList.stream().filter(a->a.getId()== id).collect(Collectors.toList()).get(0);
-
-
-        appUserList.remove(appUserList.indexOf(appUser1));
+        if(appUserRepository.findById(id)==null){
+            throw new RuntimeException("User Not Found");
+        }else {
+            appUserRepository.deleteById(id);
+        }
 
 
     }
