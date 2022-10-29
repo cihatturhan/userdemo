@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    username: docker
+    url: jdbc:postgresql://PostgreSQL:5432/postgres
+    driverClassName: org.postgresql.Driver
+    platform: postgres
+    password: docker
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      show-sql: 'true'
+      ddl-auto: update
