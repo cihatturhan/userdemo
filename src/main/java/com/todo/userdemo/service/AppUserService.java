@@ -1,6 +1,6 @@
 package com.todo.userdemo.service;
 
-import com.todo.userdemo.model.AppUser;
+import com.todo.userdemo.entity.AppUser;
 
 import java.util.List;
 

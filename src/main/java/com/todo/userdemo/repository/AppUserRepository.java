@@ -1,6 +1,6 @@
 package com.todo.userdemo.repository;
 
-import com.todo.userdemo.model.AppUser;
+import com.todo.userdemo.entity.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

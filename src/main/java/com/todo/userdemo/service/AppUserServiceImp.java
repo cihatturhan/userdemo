@@ -1,6 +1,7 @@
 package com.todo.userdemo.service;
 
-import com.todo.userdemo.model.AppUser;
+import com.todo.userdemo.exceptions.UserNotFoundException;
+import com.todo.userdemo.entity.AppUser;
 import com.todo.userdemo.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,7 +26,7 @@ public class AppUserServiceImp implements  AppUserService{
 
 
 
-        return appUserRepository.findById(id).orElseThrow(()->new RuntimeException("User not Found"));
+        return appUserRepository.findById(id).orElseThrow(()->new UserNotFoundException("User Not Found"));
     }
 
     @Override
@@ -43,7 +44,7 @@ public class AppUserServiceImp implements  AppUserService{
     @Override
     public void deleteAppUser(Long id) {
         if(appUserRepository.findById(id)==null){
-            throw new RuntimeException("User Not Found");
+            throw new UserNotFoundException("User Not Found");
         }else {
             appUserRepository.deleteById(id);
         }

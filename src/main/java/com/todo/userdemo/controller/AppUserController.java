@@ -1,6 +1,6 @@
 package com.todo.userdemo.controller;
 
-import com.todo.userdemo.model.AppUser;
+import com.todo.userdemo.entity.AppUser;
 import com.todo.userdemo.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
